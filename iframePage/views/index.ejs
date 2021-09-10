@@ -1,11 +1,39 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>EJS Welcome to <%= title %></p>
-  </body>
+
+<head>
+  <title>
+    <%= title %>
+  </title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+  <h1>
+    <%= title %>
+  </h1>
+  <p onclick="clickfn()">EJS Welcome to <%= title %>
+  </p>
+</body>
+
+<!-- iframe内部的脚本 -->
+<script>
+  const parentWindow = window.parent
+
+  window
+    .addEventListener('message', (e) => {
+      console.log('iframe监听message：', e)
+    })
+
+  parentWindow.addEventListener('message', (e) => {
+    console.log('iframe中获取parent监听message', e)
+  })
+
+  function clickfn() {
+    window.postMessage('iframe发送的消息', '*')
+    parentWindow.postMessage('iframe中获取parent发送的消息', '*')
+  }
+
+</script>
+
 </html>
