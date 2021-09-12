@@ -28,6 +28,7 @@
       console.log('parent监听message：', e)
     })
 
+  //无法监听
   iframeWindow.addEventListener('message', (e) => {
     console.log('parent中获取iframe监听message：', e)
   })
